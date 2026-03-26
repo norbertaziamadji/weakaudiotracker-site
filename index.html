@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weak Audio Tracker - Analyseur audio portable</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="assets/logo/weak_audio_tracker_logo.ico">
+    <link rel="apple-touch-icon" href="assets/logo/weak_audio_tracker_logo.ico">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="assets/logo/weak_audio_tracker_logo.png" alt="Weak Audio Tracker" class="logo">
+            <h1>Weak Audio Tracker</h1>
+            <p class="tagline">Analyseur audio portable qui scanne, classe et nettoie votre bibliothèque musicale.</p>
+            <div class="badges">
+                <span class="badge"><i class="fas fa-tag"></i> v1.0</span>
+                <span class="badge"><i class="fas fa-gift"></i> Gratuit</span>
+                <span class="badge"><i class="fas fa-usb"></i> Portable</span>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <a href="#features"><i class="fas fa-rocket"></i> Fonctionnalités</a>
+            <a href="#download"><i class="fas fa-download"></i> Téléchargement</a>
+            <a href="#screenshots"><i class="fas fa-image"></i> Captures</a>
+            <a href="#guide"><i class="fas fa-book"></i> Guide</a>
+            <a href="#privacy"><i class="fas fa-lock"></i> Confidentialité</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <!-- Section Fonctionnalités -->
+            <section id="features">
+                <h2><i class="fas fa-rocket"></i> Fonctionnalités</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-search fa-2x"></i>
+                        <h3>Analyse audio</h3>
+                        <p>Scan récursif des dossiers. Support MP3, M4A, FLAC, WAV, OGG, AAC...</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-chart-line fa-2x"></i>
+                        <h3>Classification</h3>
+                        <p>Bonne (≥128 kbps), moyenne (64-127), faible (&lt;64 kbps)</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-tools fa-2x"></i>
+                        <h3>Réparation</h3>
+                        <p>Réparation automatique des fichiers corrompus (taux succès ~77%)</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-copy fa-2x"></i>
+                        <h3>Doublons</h3>
+                        <p>5 méthodes de détection : exacts, taille, noms, contenu, probables</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-chart-pie fa-2x"></i>
+                        <h3>Rapports</h3>
+                        <p>Graphiques camembert et barres. Export HTML et CSV</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-broom fa-2x"></i>
+                        <h3>Nettoyage</h3>
+                        <p>Déplace les fichiers faibles, supprime les doublons en un clic</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-palette fa-2x"></i>
+                        <h3>Interface</h3>
+                        <p>Mode clair/sombre, icônes vectorielles, console en direct</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt fa-2x"></i>
+                        <h3>Confidentialité</h3>
+                        <p>Télémétrie anonyme optionnelle. Aucune donnée personnelle</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Téléchargement -->
+            <section id="download">
+                <h2><i class="fas fa-download"></i> Téléchargement</h2>
+                <div class="download-grid">
+                    <div class="download-card">
+                        <i class="fab fa-windows fa-3x"></i>
+                        <h3>Windows</h3>
+                        <p>Version portable, 7/8/10/11, 64-bit</p>
+                        <div class="download-links">
+                            <a href="https://github.com/norbertaziamadji/WeakAudioTracker/releases/download/v1.0/WeakAudioTracker_v1.0.zip" class="btn github-btn">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="#" class="btn drive-btn" id="driveLink">
+                                <i class="fab fa-google-drive"></i> Google Drive
+                            </a>
+                        </div>
+                        <p class="small-note">🔗 <a href="https://github.com/norbertaziamadji/WeakAudioTracker" target="_blank">Code source sur GitHub</a></p>
+                    </div>
+                    <div class="download-card">
+                        <i class="fab fa-linux fa-3x"></i>
+                        <h3>Linux</h3>
+                        <p>Version à venir</p>
+                        <button class="btn disabled" disabled><i class="fas fa-hourglass-half"></i> Bientôt</button>
+                    </div>
+                    <div class="download-card">
+                        <i class="fab fa-android fa-3x"></i>
+                        <h3>Android</h3>
+                        <p>Version à venir</p>
+                        <button class="btn disabled" disabled><i class="fas fa-hourglass-half"></i> Bientôt</button>
+                    </div>
+                </div>
+                <div class="mirror-note">
+                    <i class="fas fa-info-circle"></i> Si GitHub ne répond pas, utilisez le miroir Google Drive.
+                </div>
+            </section>
+
+            <!-- Section Captures d'écran -->
+            <section id="screenshots">
+                <h2><i class="fas fa-image"></i> Captures d'écran</h2>
+                <div class="screenshots-grid">
+                    <div class="screenshot-card">
+                        <div class="screenshot-placeholder">
+                            <i class="fas fa-chart-pie fa-4x"></i>
+                            <p>Graphique camembert</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <div class="screenshot-placeholder">
+                            <i class="fas fa-chart-bar fa-4x"></i>
+                            <p>Distribution des bitrates</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <div class="screenshot-placeholder">
+                            <i class="fas fa-list fa-4x"></i>
+                            <p>Onglet Rapport</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="note"><i class="fas fa-camera"></i> Les captures réelles seront ajoutées prochainement.</p>
+            </section>
+
+            <!-- Section Guide rapide -->
+            <section id="guide">
+                <h2><i class="fas fa-book"></i> Guide rapide</h2>
+                <div class="guide-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <i class="fas fa-download"></i>
+                        <p>Téléchargez et décompressez l'archive</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <i class="fas fa-mouse-pointer"></i>
+                        <p>Double-cliquez sur <code>WeakAudioTracker.exe</code></p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <i class="fas fa-folder-open"></i>
+                        <p>Cliquez sur "Choisir un dossier"</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <i class="fas fa-chart-line"></i>
+                        <p>L'analyse démarre automatiquement</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <i class="fas fa-chart-simple"></i>
+                        <p>Consultez les résultats dans les onglets Rapport et Nettoyage</p>
+                    </div>
+                </div>
+                <div class="tip">
+                    <i class="fas fa-lightbulb"></i> <strong>Astuce :</strong> Au premier lancement, un dossier <code>data/</code> sera créé automatiquement (contient vos rapports et paramètres).
+                </div>
+            </section>
+
+            <!-- Section Confidentialité -->
+            <section id="privacy">
+                <h2><i class="fas fa-lock"></i> Confidentialité</h2>
+                <p>Weak Audio Tracker peut collecter des <strong>données anonymes</strong> (OS, matériel, fonctionnalités utilisées, erreurs) uniquement avec votre consentement.</p>
+                <p><i class="fas fa-ban"></i> <strong>Aucune donnée personnelle</strong> : noms de fichiers, chemins d'accès, contenu audio, adresse IP, informations personnelles.</p>
+                <p><i class="fas fa-sliders-h"></i> Vous pouvez refuser au premier démarrage ou modifier votre choix dans les paramètres.</p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><i class="far fa-copyright"></i> 2026 Norbert Aziamadji. Logiciel privé. Tous droits réservés.</p>
+            <p>Développé avec <i class="fas fa-heart"></i> pour les collectionneurs de musique</p>
+        </div>
+    </footer>
+
+    <script>
+        // Le lien Google Drive sera mis à jour quand tu auras uploadé le fichier
+        // Pour l'instant, le lien GitHub est actif
+        document.getElementById('driveLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Lien Google Drive à venir. Utilisez GitHub pour le moment.');
+        });
+    </script>
+</body>
+</html>
