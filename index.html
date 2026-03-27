@@ -94,7 +94,7 @@
                             <a href="https://github.com/norbertaziamadji/WeakAudioTracker/releases/download/v1.0/WeakAudioTracker_v1.0.zip" class="btn github-btn">
                                 <i class="fab fa-github"></i> GitHub
                             </a>
-                            <a href="https://drive.google.com/file/d/1IxjSJRpdWNtI7FiZz_eM8Me1SDczSt75/view?usp=sharing" class="btn drive-btn" id="driveLink">
+                            <a href="https://drive.google.com/file/d/1IxjSJRpdWNtI7FiZz_eM8Me1SDczSt75/view?usp=sharing" class="btn drive-btn">
                                 <i class="fab fa-google-drive"></i> Google Drive
                             </a>
                         </div>
@@ -116,6 +116,28 @@
                 <div class="mirror-note">
                     <i class="fas fa-info-circle"></i> Si GitHub ne répond pas, utilisez le miroir Google Drive.
                 </div>
+
+                <!-- Compteurs de téléchargements globaux -->
+                <div class="download-stats" style="display: flex; justify-content: center; gap: 30px; margin: 30px 0; flex-wrap: wrap; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                    <div class="stat-item" style="text-align: center;">
+                        <i class="fab fa-windows fa-2x"></i>
+                        <p style="margin: 5px 0;">Windows</p>
+                        <span id="windows-count" style="font-size: 1.5rem; font-weight: bold;">0</span>
+                        <span style="font-size: 0.8rem;"> téléchargements</span>
+                    </div>
+                    <div class="stat-item" style="text-align: center;">
+                        <i class="fab fa-linux fa-2x"></i>
+                        <p style="margin: 5px 0;">Linux</p>
+                        <span id="linux-count" style="font-size: 1.5rem; font-weight: bold;">0</span>
+                        <span style="font-size: 0.8rem;"> (à venir)</span>
+                    </div>
+                    <div class="stat-item" style="text-align: center;">
+                        <i class="fab fa-android fa-2x"></i>
+                        <p style="margin: 5px 0;">Android</p>
+                        <span id="android-count" style="font-size: 1.5rem; font-weight: bold;">0</span>
+                        <span style="font-size: 0.8rem;"> (à venir)</span>
+                    </div>
+                </div>
             </section>
 
             <!-- Section Captures d'écran -->
@@ -123,25 +145,18 @@
                 <h2><i class="fas fa-image"></i> Captures d'écran</h2>
                 <div class="screenshots-grid">
                     <div class="screenshot-card">
-                        <div class="screenshot-placeholder">
-                            <i class="fas fa-chart-pie fa-4x"></i>
-                            <p>Graphique camembert</p>
-                        </div>
+                        <img src="assets/screenshots/analyse.png" alt="Onglet Analyse" style="width:100%; border-radius:8px;">
+                        <p style="margin-top:10px;">Onglet Analyse</p>
                     </div>
                     <div class="screenshot-card">
-                        <div class="screenshot-placeholder">
-                            <i class="fas fa-chart-bar fa-4x"></i>
-                            <p>Distribution des bitrates</p>
-                        </div>
+                        <img src="assets/screenshots/rapport.png" alt="Onglet Rapport" style="width:100%; border-radius:8px;">
+                        <p style="margin-top:10px;">Onglet Rapport</p>
                     </div>
                     <div class="screenshot-card">
-                        <div class="screenshot-placeholder">
-                            <i class="fas fa-list fa-4x"></i>
-                            <p>Onglet Rapport</p>
-                        </div>
+                        <img src="assets/screenshots/nettoyage.png" alt="Onglet Nettoyage" style="width:100%; border-radius:8px;">
+                        <p style="margin-top:10px;">Onglet Nettoyage</p>
                     </div>
                 </div>
-                <p class="note"><i class="fas fa-camera"></i> Les captures réelles seront ajoutées prochainement.</p>
             </section>
 
             <!-- Section Guide rapide -->
@@ -196,5 +211,71 @@
         </div>
     </footer>
 
+    <script>
+        // === COMPTEURS GLOBAUX AVEC GOOGLE SHEETS ===
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwuULor5nAzoIEMQi3v4ZFT9IRQvkK80afjP33NypYBXotlYHnSdstDrU7mmBtxgz10-w/exec';
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRi1N0m3vHyMiCzmxr40HCIkTJlbZSxI7WMQ-VhS5eHMAv0dUqPfLoxQmHM2znwaw7Ai8IHV_lzCbgc/pub?output=csv';
+        
+        let counters = { windows: 0, linux: 0, android: 0 };
+        
+        // Charger les compteurs depuis le CSV
+        async function loadCounters() {
+            try {
+                const response = await fetch(CSV_URL);
+                const csv = await response.text();
+                const lines = csv.split('\n');
+                for (let i = 1; i < lines.length; i++) {
+                    const [platform, count] = lines[i].split(',');
+                    if (platform && count) {
+                        counters[platform.trim()] = parseInt(count) || 0;
+                        const element = document.getElementById(`${platform.trim()}-count`);
+                        if (element) element.innerText = counters[platform.trim()];
+                    }
+                }
+            } catch (e) {
+                console.log('Erreur chargement compteurs:', e);
+            }
+        }
+        
+        // Incrémenter un compteur
+        async function incrementCounter(platform) {
+            counters[platform]++;
+            const element = document.getElementById(`${platform}-count`);
+            if (element) element.innerText = counters[platform];
+            
+            // Envoyer au script Google
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ platform, count: counters[platform] })
+                });
+            } catch(e) {
+                console.log('Erreur mise à jour:', e);
+            }
+        }
+        
+        // Attacher les événements aux boutons
+        function attachEvents() {
+            const githubBtn = document.querySelector('.github-btn');
+            const driveBtn = document.querySelector('.drive-btn');
+            
+            const handleWindowsClick = () => incrementCounter('windows');
+            
+            if (githubBtn) githubBtn.addEventListener('click', handleWindowsClick);
+            if (driveBtn) driveBtn.addEventListener('click', handleWindowsClick);
+            
+            // Pour Linux et Android (à décommenter plus tard)
+            // const linuxBtn = document.querySelector('.linux-btn');
+            // if (linuxBtn) linuxBtn.addEventListener('click', () => incrementCounter('linux'));
+            // const androidBtn = document.querySelector('.android-btn');
+            // if (androidBtn) androidBtn.addEventListener('click', () => incrementCounter('android'));
+        }
+        
+        // Initialiser
+        loadCounters();
+        attachEvents();
+    </script>
 </body>
 </html>
