@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weak Audio Tracker - Analyseur audio portable</title>
+    <title>Weak Audio Tracker - Analyseur audio PC & Android</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="assets/logo/weak_audio_tracker_logo.ico">
@@ -14,11 +14,11 @@
         <div class="container">
             <img src="assets/logo/weak_audio_tracker_logo.png" alt="Weak Audio Tracker" class="logo">
             <h1>Weak Audio Tracker</h1>
-            <p class="tagline">Analyseur audio portable qui scanne, classe et nettoie votre bibliothèque musicale.</p>
+            <p class="tagline">Analyse, nettoie et améliore votre musique sur <strong>PC & Android</strong></p>
             <div class="badges">
-                <span class="badge"><i class="fas fa-tag"></i> v1.0</span>
+                <span class="badge windows-badge"><i class="fab fa-windows"></i> Windows v1.0</span>
+                <span class="badge android-badge"><i class="fab fa-android"></i> Android v1.0</span>
                 <span class="badge"><i class="fas fa-gift"></i> Gratuit</span>
-                <span class="badge"><i class="fas fa-usb"></i> Portable</span>
             </div>
         </div>
     </header>
@@ -35,14 +35,14 @@
 
     <main>
         <div class="container">
-            <!-- Section Fonctionnalités -->
+            <!-- ========== SECTION FONCTIONNALITÉS ========== -->
             <section id="features">
                 <h2><i class="fas fa-rocket"></i> Fonctionnalités</h2>
                 <div class="features-grid">
                     <div class="feature-card">
                         <i class="fas fa-search fa-2x"></i>
-                        <h3>Analyse audio</h3>
-                        <p>Scan récursif des dossiers. Support MP3, M4A, FLAC, WAV, OGG, AAC...</p>
+                        <h3>Scan complet</h3>
+                        <p>Analyse tous vos fichiers audio. Support MP3, M4A, FLAC, WAV, OGG, AAC...</p>
                     </div>
                     <div class="feature-card">
                         <i class="fas fa-chart-line fa-2x"></i>
@@ -50,29 +50,19 @@
                         <p>Bonne (≥128 kbps), moyenne (64-127), faible (&lt;64 kbps)</p>
                     </div>
                     <div class="feature-card">
-                        <i class="fas fa-tools fa-2x"></i>
-                        <h3>Réparation</h3>
-                        <p>Réparation automatique des fichiers corrompus (taux succès ~77%)</p>
-                    </div>
-                    <div class="feature-card">
                         <i class="fas fa-copy fa-2x"></i>
                         <h3>Doublons</h3>
-                        <p>5 méthodes de détection : exacts, taille, noms, contenu, probables</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-chart-pie fa-2x"></i>
-                        <h3>Rapports</h3>
-                        <p>Graphiques camembert et barres. Export HTML et CSV</p>
+                        <p>Détection par nom de fichier. Version avancée (empreinte audio) en V2.</p>
                     </div>
                     <div class="feature-card">
                         <i class="fas fa-broom fa-2x"></i>
                         <h3>Nettoyage</h3>
-                        <p>Déplace les fichiers faibles, supprime les doublons en un clic</p>
+                        <p>Supprime les fichiers faibles et les doublons en un clic</p>
                     </div>
                     <div class="feature-card">
-                        <i class="fas fa-palette fa-2x"></i>
-                        <h3>Interface</h3>
-                        <p>Mode clair/sombre, icônes vectorielles, console en direct</p>
+                        <i class="fas fa-chart-pie fa-2x"></i>
+                        <h3>Statistiques</h3>
+                        <p>Graphiques, rapports HTML/CSV (PC) / Export logs (Android)</p>
                     </div>
                     <div class="feature-card">
                         <i class="fas fa-shield-alt fa-2x"></i>
@@ -82,14 +72,15 @@
                 </div>
             </section>
 
-            <!-- Section Téléchargement -->
+            <!-- ========== SECTION TÉLÉCHARGEMENT ========== -->
             <section id="download">
                 <h2><i class="fas fa-download"></i> Téléchargement</h2>
                 <div class="download-grid">
-                    <div class="download-card">
+                    <!-- Carte Windows -->
+                    <div class="download-card windows-card">
                         <i class="fab fa-windows fa-3x"></i>
                         <h3>Windows</h3>
-                        <p>Version portable, 7/8/10/11, 64-bit</p>
+                        <p>Version portable · 7/8/10/11 · 64-bit · ~65 Mo</p>
                         <div class="download-links">
                             <a href="https://github.com/norbertaziamadji/WeakAudioTracker/releases/download/v1.0/WeakAudioTracker_v1.0.zip" class="btn github-btn">
                                 <i class="fab fa-github"></i> GitHub
@@ -100,106 +91,155 @@
                         </div>
                         <p class="small-note">🔗 <a href="https://github.com/norbertaziamadji/WeakAudioTracker" target="_blank">Code source sur GitHub</a></p>
                     </div>
-                    <div class="download-card">
-                        <i class="fab fa-linux fa-3x"></i>
-                        <h3>Linux</h3>
-                        <p>Version à venir</p>
-                        <button class="btn disabled" disabled><i class="fas fa-hourglass-half"></i> Bientôt</button>
-                    </div>
-                    <div class="download-card">
+
+                    <!-- Carte Android -->
+                    <div class="download-card android-card">
                         <i class="fab fa-android fa-3x"></i>
                         <h3>Android</h3>
-                        <p>Version à venir</p>
-                        <button class="btn disabled" disabled><i class="fas fa-hourglass-half"></i> Bientôt</button>
+                        <p>APK · Android 10+ · ~115 Mo</p>
+                        <div class="download-links">
+                            <a href="https://drive.google.com/file/d/17PwMs3jDHY89sm7QAE97g3RAXbDhIGnK/view?usp=drivesdk" class="btn android-drive-btn">
+                                <i class="fab fa-google-drive"></i> Télécharger l'APK
+                            </a>
+                        </div>
+                        <p class="small-note"><i class="fas fa-mobile-alt"></i> <strong>Installation :</strong> Autoriser "Sources inconnues" (Paramètres → Sécurité → Sources inconnues)</p>
                     </div>
                 </div>
                 <div class="mirror-note">
-                    <i class="fas fa-info-circle"></i> Si GitHub ne répond pas, utilisez le miroir Google Drive.
+                    <i class="fas fa-info-circle"></i> Si GitHub ne répond pas (Windows), utilisez le miroir Google Drive.
                 </div>
 
-                <!-- Compteurs de téléchargements globaux -->
-                <div class="download-stats" style="display: flex; justify-content: center; gap: 30px; margin: 30px 0; flex-wrap: wrap; padding: 15px; background: #f8f9fa; border-radius: 10px;">
-                    <div class="stat-item" style="text-align: center;">
+                <!-- Compteurs globaux -->
+                <div class="download-stats">
+                    <div class="stat-item">
                         <i class="fab fa-windows fa-2x"></i>
-                        <p style="margin: 5px 0;">Windows</p>
-                        <span id="windows-count" style="font-size: 1.5rem; font-weight: bold;">0</span>
-                        <span style="font-size: 0.8rem;"> téléchargements</span>
+                        <p>Téléchargements Windows</p>
+                        <span id="windows-count" class="stat-number">0</span>
                     </div>
-                    <div class="stat-item" style="text-align: center;">
-                        <i class="fab fa-linux fa-2x"></i>
-                        <p style="margin: 5px 0;">Linux</p>
-                        <span id="linux-count" style="font-size: 1.5rem; font-weight: bold;">0</span>
-                        <span style="font-size: 0.8rem;"> (à venir)</span>
-                    </div>
-                    <div class="stat-item" style="text-align: center;">
+                    <div class="stat-item">
                         <i class="fab fa-android fa-2x"></i>
-                        <p style="margin: 5px 0;">Android</p>
-                        <span id="android-count" style="font-size: 1.5rem; font-weight: bold;">0</span>
-                        <span style="font-size: 0.8rem;"> (à venir)</span>
+                        <p>Téléchargements Android</p>
+                        <span id="android-count" class="stat-number">0</span>
                     </div>
                 </div>
             </section>
 
-            <!-- Section Captures d'écran -->
+            <!-- ========== SECTION CAPTURES D'ÉCRAN ========== -->
             <section id="screenshots">
                 <h2><i class="fas fa-image"></i> Captures d'écran</h2>
+                
+                <!-- PC -->
+                <h3 class="platform-title"><i class="fab fa-windows"></i> Windows</h3>
                 <div class="screenshots-grid">
                     <div class="screenshot-card">
-                        <img src="assets/screenshots/analyse.png" alt="Onglet Analyse" style="width:100%; border-radius:8px;">
-                        <p style="margin-top:10px;">Onglet Analyse</p>
+                        <img src="assets/screenshots_pc/analyse.png" alt="Onglet Analyse PC">
+                        <p>Onglet Analyse</p>
                     </div>
                     <div class="screenshot-card">
-                        <img src="assets/screenshots/rapport.png" alt="Onglet Rapport" style="width:100%; border-radius:8px;">
-                        <p style="margin-top:10px;">Onglet Rapport</p>
+                        <img src="assets/screenshots_pc/rapport.png" alt="Onglet Rapport PC">
+                        <p>Onglet Rapport</p>
                     </div>
                     <div class="screenshot-card">
-                        <img src="assets/screenshots/nettoyage.png" alt="Onglet Nettoyage" style="width:100%; border-radius:8px;">
-                        <p style="margin-top:10px;">Onglet Nettoyage</p>
+                        <img src="assets/screenshots_pc/nettoyage.png" alt="Onglet Nettoyage PC">
+                        <p>Onglet Nettoyage</p>
+                    </div>
+                </div>
+
+                <!-- Android -->
+                <h3 class="platform-title android-title"><i class="fab fa-android"></i> Android</h3>
+                <div class="screenshots-grid android-screenshots">
+                    <div class="screenshot-card">
+                        <img src="assets/screenshots_android/analyse_complete.png" alt="Scan complet Android">
+                        <p>Scan complet</p>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="assets/screenshots_android/analyse_individuel_1.png" alt="Analyse fichier Android">
+                        <p>Analyse fichier</p>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="assets/screenshots_android/analyse_individuel_2.png" alt="Résultat API Android">
+                        <p>Résultat API (bitrate réel)</p>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="assets/screenshots_android/nettoyage_android.png" alt="Nettoyage Android">
+                        <p>Nettoyage</p>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="assets/screenshots_android/doublon.png" alt="Doublons Android">
+                        <p>Détection doublons</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Section Guide rapide -->
+            <!-- ========== GUIDE RAPIDE ========== -->
             <section id="guide">
                 <h2><i class="fas fa-book"></i> Guide rapide</h2>
-                <div class="guide-steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <i class="fas fa-download"></i>
-                        <p>Téléchargez et décompressez l'archive</p>
+                <div class="guide-grid">
+                    <!-- Colonne Windows -->
+                    <div class="guide-col">
+                        <h3><i class="fab fa-windows"></i> Windows</h3>
+                        <div class="guide-steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <i class="fas fa-download"></i>
+                                <p>Téléchargez et décompressez l'archive</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <i class="fas fa-mouse-pointer"></i>
+                                <p>Double-cliquez sur <code>WeakAudioTracker.exe</code></p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <i class="fas fa-folder-open"></i>
+                                <p>Cliquez sur "Choisir un dossier"</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <i class="fas fa-chart-line"></i>
+                                <p>L'analyse démarre automatiquement</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <i class="fas fa-mouse-pointer"></i>
-                        <p>Double-cliquez sur <code>WeakAudioTracker.exe</code></p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <i class="fas fa-folder-open"></i>
-                        <p>Cliquez sur "Choisir un dossier"</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <i class="fas fa-chart-line"></i>
-                        <p>L'analyse démarre automatiquement</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">5</div>
-                        <i class="fas fa-chart-simple"></i>
-                        <p>Consultez les résultats dans les onglets Rapport et Nettoyage</p>
+
+                    <!-- Colonne Android -->
+                    <div class="guide-col">
+                        <h3><i class="fab fa-android"></i> Android</h3>
+                        <div class="guide-steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <i class="fas fa-download"></i>
+                                <p>Téléchargez l'APK</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <i class="fas fa-shield-alt"></i>
+                                <p>Autorisez "Sources inconnues" (paramètres)</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <i class="fas fa-folder-open"></i>
+                                <p>Ouvrez l'application</p>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <i class="fas fa-chart-line"></i>
+                                <p>Lancez "Scanner toute la bibliothèque"</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="tip">
-                    <i class="fas fa-lightbulb"></i> <strong>Astuce :</strong> Au premier lancement, un dossier <code>data/</code> sera créé automatiquement (contient vos rapports et paramètres).
+                    <i class="fas fa-lightbulb"></i> <strong>Astuce :</strong> Sur Android, la première analyse peut prendre quelques secondes selon le nombre de fichiers.
                 </div>
             </section>
 
-            <!-- Section Confidentialité -->
+            <!-- ========== CONFIDENTIALITÉ ========== -->
             <section id="privacy">
                 <h2><i class="fas fa-lock"></i> Confidentialité</h2>
                 <p>Weak Audio Tracker peut collecter des <strong>données anonymes</strong> (OS, matériel, fonctionnalités utilisées, erreurs) uniquement avec votre consentement.</p>
                 <p><i class="fas fa-ban"></i> <strong>Aucune donnée personnelle</strong> : noms de fichiers, chemins d'accès, contenu audio, adresse IP, informations personnelles.</p>
-                <p><i class="fas fa-sliders-h"></i> Vous pouvez refuser au premier démarrage ou modifier votre choix dans les paramètres.</p>
+                <p><i class="fas fa-sliders-h"></i> Vous pouvez refuser au premier démarrage ou modifier votre choix dans les paramètres (Support → Exporter les logs).</p>
             </section>
         </div>
     </main>
@@ -212,13 +252,12 @@
     </footer>
 
     <script>
-        // === COMPTEURS GLOBAUX AVEC GOOGLE SHEETS ===
+        // === COMPTEURS AVEC GOOGLE SHEETS ===
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwuULor5nAzoIEMQi3v4ZFT9IRQvkK80afjP33NypYBXotlYHnSdstDrU7mmBtxgz10-w/exec';
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRi1N0m3vHyMiCzmxr40HCIkTJlbZSxI7WMQ-VhS5eHMAv0dUqPfLoxQmHM2znwaw7Ai8IHV_lzCbgc/pub?output=csv';
         
-        let counters = { windows: 0, linux: 0, android: 0 };
+        let counters = { windows: 0, android: 0 };
         
-        // Charger les compteurs depuis le CSV
         async function loadCounters() {
             try {
                 const response = await fetch(CSV_URL);
@@ -237,13 +276,10 @@
             }
         }
         
-        // Incrémenter un compteur
         async function incrementCounter(platform) {
             counters[platform]++;
             const element = document.getElementById(`${platform}-count`);
             if (element) element.innerText = counters[platform];
-            
-            // Envoyer au script Google
             try {
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
@@ -256,24 +292,18 @@
             }
         }
         
-        // Attacher les événements aux boutons
         function attachEvents() {
+            // Windows
             const githubBtn = document.querySelector('.github-btn');
-            const driveBtn = document.querySelector('.drive-btn');
+            const windowsDriveBtn = document.querySelector('.download-card.windows-card .drive-btn');
+            if (githubBtn) githubBtn.addEventListener('click', () => incrementCounter('windows'));
+            if (windowsDriveBtn) windowsDriveBtn.addEventListener('click', () => incrementCounter('windows'));
             
-            const handleWindowsClick = () => incrementCounter('windows');
-            
-            if (githubBtn) githubBtn.addEventListener('click', handleWindowsClick);
-            if (driveBtn) driveBtn.addEventListener('click', handleWindowsClick);
-            
-            // Pour Linux et Android (à décommenter plus tard)
-            // const linuxBtn = document.querySelector('.linux-btn');
-            // if (linuxBtn) linuxBtn.addEventListener('click', () => incrementCounter('linux'));
-            // const androidBtn = document.querySelector('.android-btn');
-            // if (androidBtn) androidBtn.addEventListener('click', () => incrementCounter('android'));
+            // Android
+            const androidBtn = document.querySelector('.android-drive-btn');
+            if (androidBtn) androidBtn.addEventListener('click', () => incrementCounter('android'));
         }
         
-        // Initialiser
         loadCounters();
         attachEvents();
     </script>
