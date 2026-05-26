@@ -254,31 +254,23 @@
     </footer>
 
     <script>
-    // === COMPTEURS VIA SCRIPT GOOGLE + localStorage ===
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz1ec710eSfFEB0_gMiyeTPOM_mE_wJZ2V8VfTAEsBMBm30Dq-jHkv9Equ4G6Q5uzR-sw/exec';
+    // === COMPTEURS VIA API RENDER (temps réel) ===
+    const API_URL = 'https://weak-audio-counter-api.onrender.com';
 
     let counters = { windows: 0, android: 0 };
 
-    async function loadCounters() {
-        // 1. D'abord afficher les valeurs locales (instantané)
-        const localWindows = parseInt(localStorage.getItem('wat_windows') || '0');
-        const localAndroid = parseInt(localStorage.getItem('wat_android') || '0');
-        document.getElementById('windows-count').innerText = localWindows;
-        document.getElementById('android-count').innerText = localAndroid;
-
-        // 2. Puis charger depuis la feuille (peut être en retard à cause du cache)
+    async function wakeUpAPI() {
         try {
-            const response = await fetch(SCRIPT_URL + '?t=' + Date.now());
+            await fetch(`${API_URL}/counters`);
+        } catch(e) {}
+    }
+
+    async function loadCounters() {
+        await wakeUpAPI();
+        try {
+            const response = await fetch(`${API_URL}/counters`);
             const data = await response.json();
-            const remoteWindows = data.windows || 0;
-            const remoteAndroid = data.android || 0;
-
-            // 3. Prendre le max entre local et distant (évite la régression)
-            counters.windows = Math.max(localWindows, remoteWindows);
-            counters.android = Math.max(localAndroid, remoteAndroid);
-
-            localStorage.setItem('wat_windows', counters.windows);
-            localStorage.setItem('wat_android', counters.android);
+            counters = { windows: data.windows || 0, android: data.android || 0 };
             document.getElementById('windows-count').innerText = counters.windows;
             document.getElementById('android-count').innerText = counters.android;
         } catch (e) {
@@ -288,13 +280,11 @@
 
     async function incrementCounter(platform) {
         counters[platform]++;
-        localStorage.setItem('wat_' + platform, counters[platform]);
-        document.getElementById(platform + '-count').innerText = counters[platform];
-
+        document.getElementById(`${platform}-count`).innerText = counters[platform];
+    
         try {
-            await fetch(SCRIPT_URL, {
+            await fetch(`${API_URL}/increment`, {
                 method: 'POST',
-                mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ platform, count: counters[platform] })
             });
@@ -304,13 +294,11 @@
     }
 
     function attachEvents() {
-        // Windows
         const githubBtn = document.querySelector('.github-btn');
         const windowsDriveBtn = document.querySelector('.download-card.windows-card .drive-btn');
         if (githubBtn) githubBtn.addEventListener('click', () => incrementCounter('windows'));
         if (windowsDriveBtn) windowsDriveBtn.addEventListener('click', () => incrementCounter('windows'));
-
-        // Android
+    
         const androidBtn = document.querySelector('.android-drive-btn');
         if (androidBtn) androidBtn.addEventListener('click', () => incrementCounter('android'));
     }
