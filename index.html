@@ -254,38 +254,54 @@
     </footer>
 
     <script>
-        // === COMPTEURS VIA SCRIPT GOOGLE (API directe) ===
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz1ec710eSfFEB0_gMiyeTPOM_mE_wJZ2V8VfTAEsBMBm30Dq-jHkv9Equ4G6Q5uzR-sw/exec';
+    // === COMPTEURS VIA SCRIPT GOOGLE + localStorage ===
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz1ec710eSfFEB0_gMiyeTPOM_mE_wJZ2V8VfTAEsBMBm30Dq-jHkv9Equ4G6Q5uzR-sw/exec';
 
-        let counters = { windows: 0, android: 0 };
+    let counters = { windows: 0, android: 0 };
 
-        async function loadCounters() {
-            try {
-                const response = await fetch(SCRIPT_URL);
-                const data = await response.json();
-                counters = { windows: data.windows || 0,android:   data.android || 0 };
-                document.getElementById('windows-count').innerText = counters.windows;
-                document.getElementById('android-count').innerText = counters.android;
-            } catch (e) {
-                console.log('Erreur chargement compteurs:', e);
-            }
+    async function loadCounters() {
+        // 1. D'abord afficher les valeurs locales (instantané)
+        const localWindows = parseInt(localStorage.getItem('wat_windows') || '0');
+        const localAndroid = parseInt(localStorage.getItem('wat_android') || '0');
+        document.getElementById('windows-count').innerText = localWindows;
+        document.getElementById('android-count').innerText = localAndroid;
+
+        // 2. Puis charger depuis la feuille (peut être en retard à cause du cache)
+        try {
+            const response = await fetch(SCRIPT_URL + '?t=' + Date.now());
+            const data = await response.json();
+            const remoteWindows = data.windows || 0;
+            const remoteAndroid = data.android || 0;
+
+            // 3. Prendre le max entre local et distant (évite la régression)
+            counters.windows = Math.max(localWindows, remoteWindows);
+            counters.android = Math.max(localAndroid, remoteAndroid);
+
+            localStorage.setItem('wat_windows', counters.windows);
+            localStorage.setItem('wat_android', counters.android);
+            document.getElementById('windows-count').innerText = counters.windows;
+            document.getElementById('android-count').innerText = counters.android;
+        } catch (e) {
+            console.log('Erreur chargement compteurs:', e);
         }
+    }
 
-        async function incrementCounter(platform) {
-            counters[platform]++;
-            document.getElementById(`${platform}-count`).innerText = counters[platform];
-    
-            try {
-                await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ platform, count: counters[platform] })
-                });
-            } catch(e) {
-                console.log('Erreur mise à jour:', e);
-            }
+    async function incrementCounter(platform) {
+        counters[platform]++;
+        localStorage.setItem('wat_' + platform, counters[platform]);
+        document.getElementById(platform + '-count').innerText = counters[platform];
+
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ platform, count: counters[platform] })
+            });
+        } catch(e) {
+            console.log('Erreur mise à jour:', e);
         }
+    }
 
     function attachEvents() {
         // Windows
@@ -293,7 +309,7 @@
         const windowsDriveBtn = document.querySelector('.download-card.windows-card .drive-btn');
         if (githubBtn) githubBtn.addEventListener('click', () => incrementCounter('windows'));
         if (windowsDriveBtn) windowsDriveBtn.addEventListener('click', () => incrementCounter('windows'));
-    
+
         // Android
         const androidBtn = document.querySelector('.android-drive-btn');
         if (androidBtn) androidBtn.addEventListener('click', () => incrementCounter('android'));
