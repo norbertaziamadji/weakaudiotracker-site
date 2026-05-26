@@ -254,34 +254,27 @@
     </footer>
 
     <script>
-        // === COMPTEURS AVEC GOOGLE SHEETS ===
+        // === COMPTEURS VIA SCRIPT GOOGLE (API directe) ===
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwuULor5nAzoIEMQi3v4ZFT9IRQvkK80afjP33NypYBXotlYHnSdstDrU7mmBtxgz10-w/exec';
-        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRi1N0m3vHyMiCzmxr40HCIkTJlbZSxI7WMQ-VhS5eHMAv0dUqPfLoxQmHM2znwaw7Ai8IHV_lzCbgc/pub?output=csv';
-        
+
         let counters = { windows: 0, android: 0 };
-        
+
         async function loadCounters() {
             try {
-                const response = await fetch(CSV_URL);
-                const csv = await response.text();
-                const lines = csv.split('\n');
-                for (let i = 1; i < lines.length; i++) {
-                    const [platform, count] = lines[i].split(',');
-                    if (platform && count) {
-                        counters[platform.trim()] = parseInt(count) || 0;
-                        const element = document.getElementById(`${platform.trim()}-count`);
-                        if (element) element.innerText = counters[platform.trim()];
-                    }
-                }
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                counters = { windows: data.windows || 0,android:   data.android || 0 };
+                document.getElementById('windows-count').innerText = counters.windows;
+                document.getElementById('android-count').innerText = counters.android;
             } catch (e) {
                 console.log('Erreur chargement compteurs:', e);
             }
         }
-        
+
         async function incrementCounter(platform) {
             counters[platform]++;
-            const element = document.getElementById(`${platform}-count`);
-            if (element) element.innerText = counters[platform];
+            document.getElementById(`${platform}-count`).innerText = counters[platform];
+    
             try {
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
@@ -293,21 +286,21 @@
                 console.log('Erreur mise à jour:', e);
             }
         }
-        
-        function attachEvents() {
-            // Windows
-            const githubBtn = document.querySelector('.github-btn');
-            const windowsDriveBtn = document.querySelector('.download-card.windows-card .drive-btn');
-            if (githubBtn) githubBtn.addEventListener('click', () => incrementCounter('windows'));
-            if (windowsDriveBtn) windowsDriveBtn.addEventListener('click', () => incrementCounter('windows'));
-            
-            // Android
-            const androidBtn = document.querySelector('.android-drive-btn');
-            if (androidBtn) androidBtn.addEventListener('click', () => incrementCounter('android'));
-        }
-        
-        loadCounters();
-        attachEvents();
+
+    function attachEvents() {
+        // Windows
+        const githubBtn = document.querySelector('.github-btn');
+        const windowsDriveBtn = document.querySelector('.download-card.windows-card .drive-btn');
+        if (githubBtn) githubBtn.addEventListener('click', () => incrementCounter('windows'));
+        if (windowsDriveBtn) windowsDriveBtn.addEventListener('click', () => incrementCounter('windows'));
+    
+        // Android
+        const androidBtn = document.querySelector('.android-drive-btn');
+        if (androidBtn) androidBtn.addEventListener('click', () => incrementCounter('android'));
+    }
+
+    loadCounters();
+    attachEvents();
     </script>
 </body>
 </html>
